@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e996cd6d-9c69-4b54-8ee5-b5425c233a39": {
+      "ProjectGuid": "e996cd6d-9c69-4b54-8ee5-b5425c233a39",
+      "DisplayName": "Timetracker",
+      "ColorIndex": 0
+    },
+    "6cb84fe5-2a5d-4da6-bc65-910489b2f19d": {
+      "ProjectGuid": "6cb84fe5-2a5d-4da6-bc65-910489b2f19d",
+      "DisplayName": "UnitTest",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
