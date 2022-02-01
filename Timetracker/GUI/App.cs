@@ -9,25 +9,37 @@ namespace Timetracker.GUI
 {
     internal class App : Window
     {
+        private  Window _navbar;
+        private Window _dashboard;
+        private Window _caseView;
         private readonly Toplevel _top;
         public App() : base()
         {
             Application.Init();
             _top = Application.Top;
-            BuildMenu();
+            InitViews();
+           // InitCallBacks();
             Application.Run();
         }
 
-        private void BuildMenu()
+        private void InitCallBacks()
         {
-            Window window = InitNavigation();
-            _top.Add(window);
+            throw new NotImplementedException();
+        }
+
+        private void InitViews()
+        {
+
+            InitNavigation();
+            InitDashBoard();
+            InitCasesView();
+
 
         }
 
-        private Window InitNavigation()
+        private void InitNavigation()
         {
-            var window = new Window("Navigation")
+            _navbar = new Window("Navigation")
             {
                 X = 0,
                 Y = 0,
@@ -45,8 +57,8 @@ namespace Timetracker.GUI
 
             nav.SelectedItemChanged += ITemChangedNav;
             nav.OpenSelectedItem += SelctedNav;
-            window.Add(nav);
-            return window;
+            _navbar.Add(nav);
+            _top.Add(_navbar);
         }
 
         private void SelctedNav(ListViewItemEventArgs obj)
@@ -58,8 +70,7 @@ namespace Timetracker.GUI
                 case "My cases":
                     break;
                 default:      
-                    _top.Running = false;
-                    //Application.Shutdown();
+               _top.Running = false;
                     break;
 
             }
@@ -70,10 +81,10 @@ namespace Timetracker.GUI
             switch (obj.Value)
             {
                 case "Dashboard":
-                    InitDashBoard();
+                    _top.BringSubviewToFront(_dashboard);
                     break;                   
                 case "My cases":
-                    InitCasesView();
+                    _top.BringSubviewToFront(_caseView);
                     break;
                 default:
                     break;
@@ -83,23 +94,28 @@ namespace Timetracker.GUI
 
         private void InitCasesView()
         {
-           
-        }
-
-        private void InitDashBoard()
-        { //Fix we should not create a new view every time
-            var window = new Window("Dashboard")
+            _caseView = new Window("Cases")
             {
-                X = _top.Subviews.Where(v => v.),
+                X = Pos.Right(_navbar),
                 Y = 0,
                 Width = Dim.Percent(80),
                 Height = Dim.Percent(100)
             };
+            _top.Add(_caseView);
+        }
+
+        private void InitDashBoard()
+        { //Fix we should not create a new view every time
+            _dashboard = new Window("Dashboard")
+            {
+                X = Pos.Right(_navbar),
+                Y = 0,
+                Width = Dim.Percent(80),
+                Height = Dim.Percent(100)
+            };
+            _top.Add(_dashboard);
 
 
-
-       
-           _top.Add(window);
         }
     }
 }
